@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="57.629" height="35.002" viewBox="0 0 57.629 35.002">
+  <g id="Group_95" data-name="Group 95" transform="translate(-697.185 -857.185)">
+    <g id="Group_94" data-name="Group 94" transform="translate(1855.957 975.096) rotate(135)">
+      <rect id="Rectangle_47" data-name="Rectangle 47" width="8" height="8" transform="translate(724 866)" fill="#ffb94d"/>
+      <rect id="Rectangle_52" data-name="Rectangle 52" width="8" height="8" transform="translate(732 858)" fill="#61dde1"/>
+      <rect id="Rectangle_50" data-name="Rectangle 50" width="8" height="8" transform="translate(716 874)" fill="#61dde1"/>
+      <rect id="Rectangle_49" data-name="Rectangle 49" width="8" height="8" transform="translate(716 858)" fill="#ffb94d"/>
+      <rect id="Rectangle_51" data-name="Rectangle 51" width="8" height="8" transform="translate(724 850)" fill="#61dde1"/>
+      <rect id="Rectangle_55" data-name="Rectangle 55" width="8" height="8" transform="translate(716 842)" fill="#61dde1"/>
+      <rect id="Rectangle_56" data-name="Rectangle 56" width="8" height="8" transform="translate(716 850)" fill="#fff"/>
+      <rect id="Rectangle_59" data-name="Rectangle 59" width="8" height="8" transform="translate(724 858)" fill="#fff"/>
+      <rect id="Rectangle_60" data-name="Rectangle 60" width="8" height="8" transform="translate(732 866)" fill="#fff"/>
+      <rect id="Rectangle_61" data-name="Rectangle 61" width="8" height="8" transform="translate(740 874)" fill="#fff"/>
+      <rect id="Rectangle_57" data-name="Rectangle 57" width="8" height="8" transform="translate(716 866)" fill="#fff"/>
+      <rect id="Rectangle_58" data-name="Rectangle 58" width="8" height="8" transform="translate(724 874)" fill="#fff"/>
+      <rect id="Rectangle_48" data-name="Rectangle 48" width="8" height="8" transform="translate(732 874)" fill="#ffb94d"/>
+      <rect id="Rectangle_53" data-name="Rectangle 53" width="8" height="8" transform="translate(740 866)" fill="#61dde1"/>
+      <rect id="Rectangle_54" data-name="Rectangle 54" width="8" height="8" transform="translate(748 874)" fill="#61dde1"/>
+    </g>
+    <g id="Group_93" data-name="Group 93" transform="translate(1879.998 982.166) rotate(135)">
+      <g id="Group_92" data-name="Group 92">
+        <line id="Line_31" data-name="Line 31" y2="40" transform="translate(736 864)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_41" data-name="Line 41" y2="40" transform="translate(728 864)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_32" data-name="Line 32" y2="32" transform="translate(744 872)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_33" data-name="Line 33" y2="24" transform="translate(752 880)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_34" data-name="Line 34" y2="16" transform="translate(760 888)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_35" data-name="Line 35" y2="8" transform="translate(768 896)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_36" data-name="Line 36" y2="40" transform="translate(768 896) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_42" data-name="Line 42" y2="40" transform="translate(768 904) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_37" data-name="Line 37" y2="32" transform="translate(760 888) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_38" data-name="Line 38" y2="24" transform="translate(752 880) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_39" data-name="Line 39" y2="16" transform="translate(744 872) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+        <line id="Line_40" data-name="Line 40" y2="8" transform="translate(736 864) rotate(90)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="0.75"/>
+      </g>
+    </g>
+  </g>
+</svg>
