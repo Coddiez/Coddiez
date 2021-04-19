@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgforDark">
+
+    <LinearLayout
+        android:id="@+id/dataLinearlayoutRankList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/personName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_weight="63"
+            android:fontFamily="@font/productsansmedium"
+            android:maxLines="2"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="TextView"
+            android:textColor="@color/whitesecondary"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/scoreShowingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:fontFamily="@font/productsansmedium"
+            android:maxLines="2"
+            android:paddingTop="18dp"
+            android:paddingBottom="12dp"
+            android:text="1234"
+            android:textColor="@color/whitesecondary"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/whitesecondary"
+        app:layout_constraintBottom_toBottomOf="@id/dataLinearlayoutRankList" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

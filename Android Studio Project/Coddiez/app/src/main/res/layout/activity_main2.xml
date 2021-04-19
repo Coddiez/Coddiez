@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgforDark"
+    android:visibility="visible"
+    tools:context=".MainActivity2">
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeContestsListDataContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+
+                <!--            Heading -->
+                <TextView
+                    android:id="@+id/contests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/productsansmedium"
+                    android:text="Contests"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!--            Selection of timing and platform-->
+                <TableLayout
+                    android:id="@+id/tableListForOngoingUpcomingChoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/white_bg"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/contests"
+                    app:layout_constraintTop_toBottomOf="@+id/contests">
+
+
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/ongoing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@drawable/grey_bg"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Ongoing"
+                            android:textAllCaps="false"
+                            android:textColor="@color/whitemain"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/upcoming"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Upcoming"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:id="@+id/ListForPlatformChoiceMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="@+id/tableListForOngoingUpcomingChoice"
+                    app:layout_constraintTop_toBottomOf="@+id/tableListForOngoingUpcomingChoice">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bottom_wihtout_radius">
+
+                        <Button
+                            android:id="@+id/hackerrank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@drawable/grey_bg"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Hackerrank"
+                            android:textAllCaps="false"
+                            android:textColor="@color/whitemain"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/codechef"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Codechef"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/codeforces"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Codeforces"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/left_without_radius">
+
+                        <Button
+                            android:id="@+id/topCoder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="TopCoder"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/hacker_earth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="HackerEarth"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/leetCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="LeetCode"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/top_without_radius">
+
+                        <Button
+                            android:id="@+id/atCoder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="AtCoder"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/kickStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Kick-Start"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            Data displaying list-->
+                <TableLayout
+                    android:id="@+id/TableForContestDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ListForPlatformChoiceMain">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/whitemain">
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="45"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Name"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/start"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Start"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="18dp" />
+
+
+                        <TextView
+                            android:id="@+id/end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="End"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="18dp" />
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/loadingContestData"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="20dp"
+                                android:indeterminate="true"
+                                android:indeterminateTint="@color/whitesecondary"
+                                android:indeterminateTintMode="src_atop" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/whitesecondary"
+                                app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                        </LinearLayout>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/contestDetailsList"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:visibility="gone"
+                            tools:listitem="@layout/contest_data_layout" />
+
+
+                        <LinearLayout
+                            android:id="@+id/errorInContestDataLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/errorInContestDataText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/productsansmedium"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="No data available"
+                                android:textAlignment="center"
+                                android:textColor="@color/whitesecondary"
+                                android:textSize="12dp"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/whitesecondary"
+                                app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                        </LinearLayout>
+
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/leaderBoardLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/leaderboardHeadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/productsansmedium"
+                    android:gravity="center"
+                    android:text="Leaderboard"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/ListForPlatformChoiceForLeaderboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="@+id/leaderboardHeadingText"
+                    app:layout_constraintTop_toBottomOf="@+id/leaderboardHeadingText">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/white_bg">
+
+                        <Button
+                            android:id="@+id/codechefForRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@drawable/grey_bg"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="CodeChef"
+                            android:textAllCaps="false"
+                            android:textColor="@color/whitemain"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/codeforcesForRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="CodeForces"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/spojForRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Spoj"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/white_bg"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/interviewBitForRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="InterviewBit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/leetCodeForRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="LeetCode"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            Data displaying list-->
+                <TableLayout
+                    android:id="@+id/TableForRatingDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ListForPlatformChoiceForLeaderboard">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/whitemain">
+
+
+                        <TextView
+                            android:id="@+id/nameForRank"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="27dp"
+                            android:layout_weight="63"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Name"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="18dp" />
+
+
+                        <TextView
+                            android:id="@+id/scoreForRank"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingTop="0dp"
+                            android:paddingBottom="10dp"
+                            android:text="Score"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="18dp" />
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/loadingContestDataForRank"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="20dp"
+                                android:indeterminate="true"
+                                android:indeterminateTint="@color/whitesecondary"
+                                android:indeterminateTintMode="src_atop" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/whitesecondary"
+                                app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                        </LinearLayout>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rankListRecyclerView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:visibility="visible"
+                            tools:listitem="@layout/leaderbord_list_layout" />
+
+
+                        <LinearLayout
+                            android:id="@+id/errorInRankList"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/errorInRankDataText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/productsansmedium"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="No data available"
+                                android:textAlignment="center"
+                                android:textColor="@color/whitesecondary"
+                                android:textSize="12dp"
+                                android:visibility="visible" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp"
+                                android:background="@color/whitesecondary"
+                                app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                        </LinearLayout>
+
+
+                    </TableRow>
+
+                </TableLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/forecedRefreshData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TableForRatingDetails">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/productsansmedium"
+                        android:text="Error in the data?" />
+
+
+                    <Button
+                        android:id="@+id/rankingDataRefreshButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:text="Refresh"
+                        android:textAllCaps="false"
+                        android:textColor="#0893FF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/forecedRefreshingTheDataINProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TableForRatingDetails">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/whitesecondary"
+                        android:indeterminateTintMode="src_atop" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/whitesecondary"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@id/forecedRefreshData" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_top_portion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_top_data_holder_bg"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/personProfilePicture"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="32dp"
+                        android:src="@color/chat_bg"
+                        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="1dp" />
+
+
+                    <TextView
+                        android:id="@+id/personNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/productsansmedium"
+                        android:textSize="30dp"
+                        tools:text="ABC XYZ" />
+
+                    <TextView
+                        android:id="@+id/courseNameView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="9dp"
+                        android:fontFamily="@font/productsansmedium"
+                        android:textSize="20dp"
+                        tools:text="IT" />
+
+                    <TextView
+                        android:id="@+id/instituteNameView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:width="200dp"
+                        android:fontFamily="@font/productsansregular"
+                        android:textAlignment="center"
+                        tools:text="Abv-Indian Institute of Information Technology and Management Gwalior " />
+
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="18dp"
+                            android:background="@drawable/platform_link_list_holder_bg"
+                            android:paddingLeft="24dp"
+                            android:paddingTop="12dp"
+                            android:paddingRight="24dp"
+                            android:paddingBottom="12dp"
+                            android:layout_marginBottom="32dp">
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/codeForcesLinkBtn"
+                                android:layout_width="25.499651dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:background="@drawable/ic_code_forces" />
+
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/codeChefLinkBtn"
+                                android:layout_width="14.796972dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:background="@drawable/ic_code_chef" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/spoJLinkBtn"
+                                android:layout_width="18.014dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:background="@drawable/ic_spoj" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/interviewBitLinkBtn"
+                                android:layout_width="32.928974dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_interview_bit" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/leetCodeLinkBtn"
+                                android:layout_width="16.800417dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_leetcode" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/hackerRankLinkBtn"
+                                android:layout_width="18.106718dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_hacker_rank" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/gitHubLinkBtn"
+                                android:layout_width="20.869297dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_github" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/linkedInLinkBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_linkedin" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/instagramLinkBtn"
+                                android:layout_width="21.099684dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="11dp"
+                                android:src="@drawable/ic_instagram" />
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/faceBookLinkBtn"
+                                android:layout_width="21.099684dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_facebook" />
+
+
+                        </LinearLayout>
+
+
+<!--                    <ImageButton-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="32dp"-->
+<!--                        android:layout_marginBottom="32dp"-->
+<!--                        android:src="@drawable/ic_edit_profile" />-->
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            Track progress Bullshits-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/individualDataConstrainLayoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/track"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/productsansmedium"
+                    android:text="Platform wise progress"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <LinearLayout
+                    android:id="@+id/tableLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="@id/track"
+                    app:layout_constraintTop_toBottomOf="@id/track">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bottom_wihtout_radius">
+
+                        <Button
+                            android:id="@+id/codechefForSelfProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@drawable/grey_bg"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="CodeChef"
+                            android:textAllCaps="false"
+                            android:textColor="@color/whitemain"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/codeforcesForSelfProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="CodeForces"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/spojForSelfProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="Spoj"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/top_without_radius">
+
+                        <Button
+                            android:id="@+id/interviewBitForSelfProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="InterviewBit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/leetCodeForSelfProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:background="@null"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="LeetCode"
+                            android:textAllCaps="false"
+                            android:textColor="@color/textcolorNonSelected"
+                            android:textSize="15dp"
+                            app:backgroundTint="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--            rating-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/personalRankDataRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/tableLayout4"
+                    tools:listitem="@layout/individual_datalist_layout" />
+
+
+                <LinearLayout
+                    android:id="@+id/forecedRefreshPerosnalData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personalRankDataRecyclerView">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/productsansregular"
+                        android:text="Error in the data?" />
+
+
+                    <Button
+                        android:id="@+id/personalRankingDataRefreshButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansregular"
+                        android:text="Refresh"
+                        android:textAllCaps="false"
+                        android:textColor="#0893FF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/forecedRefreshingThePersonalDataINProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personalRankDataRecyclerView">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/whitesecondary"
+                        android:indeterminateTintMode="src_atop" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/whitesecondary"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@id/forecedRefreshPerosnalData" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chatLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/msgContainer"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/msg_recyclerview_layout" />
+
+        <LinearLayout
+            android:id="@+id/msgContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="81dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/msgEditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="10"
+                android:background="@drawable/chat_holder_bg"
+                android:hint="Type a message..."
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@color/whitemain"
+                android:textColorHint="@color/whitesecondary" />
+
+            <Button
+                android:id="@+id/msgSendBtn"
+                android:layout_width="40dp"
+                android:layout_height="42dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/msg_btn" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/menu_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

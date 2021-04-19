@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/hehe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/productsansmedium"
+            android:text="hehe"
+            android:textColor="#DEFFFFFF"
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/leaderboardHeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/productsansmedium"
+            android:gravity="center"
+            android:text="Leaderboard"
+            android:textColor="#DEFFFFFF"
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ListForPlatformChoiceForLeaderboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/leaderboardHeadingText"
+            app:layout_constraintTop_toBottomOf="@+id/leaderboardHeadingText">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bottom_wihtout_radius">
+
+                <Button
+                    android:id="@+id/codechefForRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/grey_bg"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Hackerrank"
+                    android:textAllCaps="false"
+                    android:textColor="@color/whitemain"
+                    android:textSize="15dp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/codeforcesForRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@null"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Codechef"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="15dp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/spojForRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@null"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Codeforces"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="15dp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/left_without_radius"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/interviewBitForRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@null"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="TopCoder"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="15dp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/leetCodeForRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@null"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="HackerEarth"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="15dp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--            Data displaying list-->
+        <TableLayout
+            android:id="@+id/TableForContestDetailsfor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ListForPlatformChoiceForLeaderboard">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/whitemain">
+
+                <TextView
+                    android:id="@+id/rank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="45"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Name"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/nameForRank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Start"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="18dp" />
+
+
+                <TextView
+                    android:id="@+id/scoreForRank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:fontFamily="@font/productsansmedium"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="End"
+                    android:textColor="@color/textcolorNonSelected"
+                    android:textSize="18dp" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/loadingContestDataForRank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/whitesecondary"
+                        android:indeterminateTintMode="src_atop" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/whitesecondary"
+                        app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rankList"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    tools:listitem="@layout/leaderbord_list_layout" />
+
+
+                <LinearLayout
+                    android:id="@+id/errorInRankList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/errorInRankDataText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="No data available"
+                        android:textAlignment="center"
+                        android:textColor="@color/whitesecondary"
+                        android:textSize="12dp"
+                        android:visibility="visible" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/whitesecondary"
+                        app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                </LinearLayout>
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

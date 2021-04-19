@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "58232042663",
+    "project_id": "coddiez-fd38e",
+    "storage_bucket": "coddiez-fd38e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58232042663:android:83f66a9301e4a1d58e9782",
+        "android_client_info": {
+          "package_name": "com.example.coddiez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58232042663-b6larefg1hqcnicj5ljglfbjs2n5mn89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAAhlTKf6vHKTW4GWU5feqCnMdhjhcZyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58232042663-b6larefg1hqcnicj5ljglfbjs2n5mn89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

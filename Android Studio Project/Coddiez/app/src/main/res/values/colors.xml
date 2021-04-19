@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="whitemain">#DEFFFFFF</color>
+    <color name="whitesecondary">#99FFFFFF</color>
+    <color name="blackmain">#DE000000</color>
+    <color name="blacksecondary">#99000000</color>
+    <color name="bgforDark">#121212</color>
+    <color name="active_btn">#343434</color>
+    <color name="green1">#0E6E20</color>
+    <color name="green2">#2E9643</color>
+    <color name="green3">#6CCB7E</color>
+    <color name="green4">#C1EECB</color>
+    <color name="green5">#F0F0F0</color>
+    <color name="textcolorNonSelected">#343434</color>
+    <color name="chat_bg">#1AFFFFFF</color>
+    <color name="chat_bg_self">#33FFFFFF</color>
+    <color name="chat_holder">#343434</color>
+    <color name="platform_list_holder_bg">#24FFFFFF</color>
+    <color name="user_data_holder_bg_color">#272727</color>
+</resources>

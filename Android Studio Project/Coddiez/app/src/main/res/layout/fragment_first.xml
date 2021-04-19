@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgforDark"
+    tools:context=".MainActivity2">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fir"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <!--            Heading -->
+            <TextView
+                android:id="@+id/contests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="Contests"
+                android:textColor="#DEFFFFFF"
+                android:textSize="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--            Selection of timing and platform-->
+            <TableLayout
+                android:id="@+id/tableListForOngoingUpcomingChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/white_bg"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/contests"
+                app:layout_constraintTop_toBottomOf="@+id/contests">
+
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/ongoing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/grey_bg"
+                        android:fontFamily="@font/productsansregular"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Ongoing"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitemain"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/upcoming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansregular"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Upcoming"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:id="@+id/ListForPlatformChoiceMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@+id/tableListForOngoingUpcomingChoice"
+                app:layout_constraintTop_toBottomOf="@+id/tableListForOngoingUpcomingChoice">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bottom_wihtout_radius">
+
+                    <Button
+                        android:id="@+id/hackerrank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/grey_bg"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Hackerrank"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitemain"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/codechef"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Codechef"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/codeforces"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Codeforces"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/left_without_radius">
+
+                    <Button
+                        android:id="@+id/topCoder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="TopCoder"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/hacker_earth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="HackerEarth"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/leetCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="LeetCode"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/top_without_radius">
+
+                    <Button
+                        android:id="@+id/atCoder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="AtCoder"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/kickStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:fontFamily="@font/productsansregular"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:text="Kick-Start"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="15dp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--            Data displaying list-->
+            <TableLayout
+                android:id="@+id/TableForContestDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ListForPlatformChoiceMain">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/whitemain">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="45"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Name"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/start"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Start"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:fontFamily="@font/productsansmedium"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="End"
+                        android:textColor="@color/textcolorNonSelected"
+                        android:textSize="18dp" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/loadingContestData"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="20dp"
+                            android:indeterminate="true"
+                            android:indeterminateTint="@color/whitesecondary"
+                            android:indeterminateTintMode="src_atop" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/whitesecondary"
+                            app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                    </LinearLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/contestDetailsList"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:listitem="@layout/contest_data_layout" />
+
+
+                    <LinearLayout
+                        android:id="@+id/errorInContestDataLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/errorInContestDataText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/productsansmedium"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:text="No data available"
+                            android:textAlignment="center"
+                            android:textColor="@color/whitesecondary"
+                            android:textSize="12dp"
+                            android:visibility="visible" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/whitesecondary"
+                            app:layout_constraintBottom_toBottomOf="@id/dataLinearlayout" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <!--            Track progress Bullshits-->
+            <TextView
+                android:id="@+id/track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="Track your progress"
+                android:textColor="#DEFFFFFF"
+                android:textSize="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TableForContestDetails" />
+            <!--            Platform choice for ranking Details-->
+<!--            <TableLayout-->
+<!--                android:id="@+id/tableLayout4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:background="@drawable/white_bg"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/track"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/track">-->
+
+<!--                <TableRow>-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/hackerRankRankDataSelection"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="27dp"-->
+<!--                        android:layout_marginStart="3dp"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:layout_marginBottom="3dp"-->
+<!--                        android:background="@drawable/grey_bg"-->
+<!--                        android:fontFamily="@font/productsansregular"-->
+<!--                        android:paddingStart="12dp"-->
+<!--                        android:paddingEnd="12dp"-->
+<!--                        android:text="Hackerrank"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/whitemain"-->
+<!--                        android:textSize="15dp"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/codeChefRankDataSelection"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="27dp"-->
+<!--                        android:layout_marginStart="3dp"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:layout_marginEnd="3dp"-->
+<!--                        android:layout_marginBottom="3dp"-->
+<!--                        android:background="@null"-->
+<!--                        android:fontFamily="@font/productsansregular"-->
+<!--                        android:paddingStart="12dp"-->
+<!--                        android:paddingEnd="12dp"-->
+<!--                        android:text="Codechef"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/textcolorNonSelected"-->
+<!--                        android:textSize="15dp"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/codeForcesRankDataSelection"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="27dp"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:layout_marginEnd="3dp"-->
+<!--                        android:layout_marginBottom="3dp"-->
+<!--                        android:background="@null"-->
+<!--                        android:fontFamily="@font/productsansregular"-->
+<!--                        android:paddingStart="12dp"-->
+<!--                        android:paddingEnd="12dp"-->
+<!--                        android:text="Codeforces"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/textcolorNonSelected"-->
+<!--                        android:textSize="15dp"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </TableRow>-->
+
+<!--            </TableLayout>-->
+
+
+            <!--            rating-->
+            <TextView
+                android:id="@+id/current_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="Current Rating : "
+                android:textColor="@color/whitesecondary"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@id/track"
+                app:layout_constraintTop_toBottomOf="@id/tableLayout4" />
+
+            <TextView
+                android:id="@+id/current_digit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="2021"
+                android:textColor="@color/whitemain"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@id/current_rating"
+                app:layout_constraintTop_toBottomOf="@id/tableLayout4" />
+
+            <TextView
+                android:id="@+id/highest_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="Highest Rating : "
+                android:textColor="@color/whitesecondary"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@id/track"
+                app:layout_constraintTop_toBottomOf="@id/current_rating" />
+
+            <TextView
+                android:id="@+id/highest_digit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/productsansmedium"
+                android:text="2021"
+                android:textColor="@color/whitemain"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@id/highest_rating"
+                app:layout_constraintTop_toBottomOf="@id/current_digit" />
+
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/activity_graph"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="30dp"-->
+            <!--                android:fontFamily="@font/productsansmedium"-->
+            <!--                android:text="Activity Graph"-->
+            <!--                android:textColor="#DEFFFFFF"-->
+            <!--                android:textSize="25dp"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/track"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/highest_rating" />-->
+
+            <!--            <TableLayout-->
+            <!--                android:id="@+id/tableLayout5"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:layout_marginRight="10dp"-->
+            <!--                android:background="@drawable/white_bg"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/activity_graph">-->
+
+            <!--                <TableRow-->
+            <!--                    android:layout_marginStart="10dp"-->
+            <!--                    android:layout_marginEnd="10dp">-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp"-->
+            <!--                        android:text="Feb"-->
+            <!--                        android:textColor="#343434" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp"-->
+            <!--                        android:text="Mar"-->
+            <!--                        android:textColor="#343434" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="26dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginBottom="8dp"-->
+            <!--                        android:text="Apr"-->
+            <!--                        android:textColor="#343434" />-->
+            <!--                </TableRow>-->
+
+            <!--                <TableRow-->
+            <!--                    android:layout_marginStart="10dp"-->
+            <!--                    android:layout_marginEnd="10dp">-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:layout_span="2"-->
+            <!--                        android:layout_weight="2"-->
+            <!--                        android:orientation="vertical">-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView10"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Mon"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView9"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Tue"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView8"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Wed"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView7"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Thu"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView6"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Fri"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView5"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Sat"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:id="@+id/textView4"-->
+            <!--                            android:layout_width="52dp"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="9dp"-->
+            <!--                            android:layout_marginBottom="10dp"-->
+            <!--                            android:paddingEnd="15dp"-->
+            <!--                            android:text="Sun"-->
+            <!--                            android:textAlignment="viewEnd"-->
+            <!--                            android:textColor="#343434" />-->
+
+            <!--                    </LinearLayout>-->
+
+
+            <!--                    <TableLayout-->
+
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:layout_weight="12">-->
+
+            <!--                        <TableRow-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="28dp"-->
+            <!--                            android:layout_marginBottom="2dp">-->
+
+            <!--                            <ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" /><ImageView-->
+            <!--                                android:layout_width="0dp"-->
+            <!--                                android:layout_height="0dp"-->
+            <!--                                android:layout_weight="1"-->
+            <!--                                android:layout_marginEnd="1dp"-->
+            <!--                                app:srcCompat="@drawable/green2_bg" />-->
+
+            <!--                          -->
+
+            <!--                        </TableRow>-->
+
+            <!--                       -->
+            <!--                    </TableLayout>-->
+
+
+            <!--                </TableRow>-->
+
+            <!--            </TableLayout>-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
