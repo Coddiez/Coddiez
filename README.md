@@ -23,32 +23,32 @@ Coddiez is an app which will make your journey in competitive programming world 
 <br /><br />
 
 # How to use ?
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/1.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/1.jpg)
 <br /><br />
 If you don't have an account : Fill all the details and refer to Overview.pdf for any queries and then click on next.
 <br /><br />
 
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/2.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/2.jpg)
 <br /><br />
 If you alread have an account : Click on sign in. Fill your username and password then click on next.
 <br /><br />
 
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/3.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/3.jpg)
 <br /><br />
 Get updated with all ongoing and upcoming contest of your favourite CP website.
 <br /><br />
 
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/4.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/4.jpg)
 <br /><br />
 Click on the leaderboard icon in the bottom to compare your ratings/score with your friends.
 <br /><br />
 
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/5.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/5.jpg)
 <br /><br />
 Use chat option at bottom to interact with your friends.
 <br /><br />
 
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/6.jpg)
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/6.jpg)
 <br /><br />
 Using profile option you can get direct links to your added CP or social media handles.
 <br /><br />
@@ -58,8 +58,8 @@ We have come across many new technologies in our way to make this project. A few
 <br /><br />
 
 
-# How to use ?
-![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/1.jpg)
+# How it works ?
+![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/HowItWorks.png)
 
 # Usage
 Install the .apk of Coddiez in your device and enough it’s enrich features.
