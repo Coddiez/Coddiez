@@ -57,6 +57,10 @@ Using profile option you can get direct links to your added CP or social media h
 We have come across many new technologies in our way to make this project. A few of them are Volley, Glide, Android studio, Kotlin, Firebase and Kontest.net to build this application.
 <br /><br />
 
+
+# How to use ?
+![alt text](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/1.jpg)
+
 # Usage
 Install the .apk of Coddiez in your device and enough it’s enrich features.
 <br /><br />
