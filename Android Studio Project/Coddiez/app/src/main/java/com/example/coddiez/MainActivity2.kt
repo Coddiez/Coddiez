@@ -38,16 +38,15 @@ import kotlin.collections.ArrayList
 
 class MainActivity2 : AppCompatActivity() {
 
-    //    Declaratioons
+    //    Declarations
 
-    private var mainUser: Users = Users()
     private lateinit var rankListAdapter: RankLIstAdapter
     private var contestTimingIdex: Int = 0
-    private var contestplatformIndex: Int = 0
-    private var curruntSelectedPlatformForSelfProgress = 0
+    private var contestPlatformIndex: Int = 0
+    private var currantSelectedPlatformForSelfProgress = 0
     private val individualDataObj = IndividualRankData()
     private var contestBaseUrl: String = "https://kontests.net/api/v1/"
-    private var gettUrlByHadle = GetUrlByHadle()
+    private var getUrlByHandle = GetUrlByHadle()
     private var contestPlatformQuery = arrayOf(
         "hacker_rank",
         "code_chef",
@@ -76,46 +75,57 @@ class MainActivity2 : AppCompatActivity() {
         "leetcodeData"
     )
 
-    private var curruntLayoutIndex: Int = 0
-    private val userdao = Userdao()
+    private var currantLayoutIndex: Int = 0
+    private val userDao = Userdao()
 
     var chatDao = ChatDao()
 
-    private val platformnsList = ArrayList<platforms_list>()
+    private val platformsList = ArrayList<platforms_list>()
     private val rankingDataList = ArrayList<rankData>()
 
     lateinit var mainHandler: Handler
     private lateinit var queueForRankData: RequestQueue
 
-    var curruntTimings = ArrayList<contestTimings>()
+    private var currantTimings = ArrayList<contestTimings>()
     var futureTimings = ArrayList<contestTimings>()
 
     private var hasBeenClickedBefore = arrayOf(true, false, false, false)
     private val randomAnimeImageUrlObj = GetRandomAnimeImageUrl()
 
+
+
+
+
+
+
+
+    //    loads initAll() for listeners setup and loads users's username data
+//    Also Creates Volley Request queue
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
-        chatDao.getUsernameAndGroupID()
         randomAnimeImageUrlObj.getURL(this)
+        chatDao.getUsernameAndGroupID()
         queueForRankData = Volley.newRequestQueue(this)
 
         initAll()
     }
 
-
     override fun onPause() {
         super.onPause()
-        mainHandler.removeCallbacks(updateTextTask)
+        mainHandler.removeCallbacks(updateLeaderBoardDataOfAll)
     }
 
     override fun onResume() {
         super.onResume()
-        mainHandler.post(updateTextTask)
+        mainHandler.post(updateLeaderBoardDataOfAll)
     }
 
 
+
+
+    //    Do all listener setup stuff
     private fun initAll() {
         fetchAndSetContestData()
 
@@ -123,20 +133,20 @@ class MainActivity2 : AppCompatActivity() {
 
 
         contestTimingButtonsSetter()
-        onclickListenersForcontestButtons()
+        onclickListenersForContestButtons()
 
 
         personalRankDataRecyclerView.layoutManager = LinearLayoutManager(this)
         chatsRecyclerView.layoutManager = LinearLayoutManager(this)
         mainHandler = Handler(Looper.getMainLooper())
 
-        setUpOnClickListenersForLeaderboardDataButtons()
+        setUpOnClickListenersForLeaderBoardDataButtons()
 
 
 
         individualDataObj.loadndividualData(
             this,
-            userdao,
+            userDao,
             rankingsBaseUrl,
             rankingPlatfomQuery,
             personalRankDataRecyclerView,
@@ -150,6 +160,7 @@ class MainActivity2 : AppCompatActivity() {
 
     }
 
+    //    set up onClick Listener for Chat send btn
     private fun chatsSendOnCLickListnerSetter() {
         msgSendBtn.setOnClickListener {
             if (msgEditText.text.isNotEmpty()) {
@@ -159,6 +170,9 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+
+
+    //    set up onClick Listener for forced data refreshing buttons
     private fun forcedRefreshingDataOnClickListenerSetter() {
 
         personalRankingDataRefreshButton.setOnClickListener {
@@ -167,7 +181,7 @@ class MainActivity2 : AppCompatActivity() {
             forecedRefreshingThePersonalDataINProgress.visibility = View.VISIBLE
             individualDataObj.loadndividualData(
                 this,
-                userdao,
+                userDao,
                 rankingsBaseUrl,
                 rankingPlatfomQuery,
                 personalRankDataRecyclerView,
@@ -188,24 +202,24 @@ class MainActivity2 : AppCompatActivity() {
 
                 Log.e("Confirmation", "being called")
 
-                userdao.getAllUsersData(platformnsList)
-                while (userdao.isWorking) {
+                userDao.getAllUsersData(platformsList)
+                while (userDao.isWorking) {
                     Thread.sleep(1000)
                     Log.e("wait", "waiting")
 
                 }
 
-                Log.d("Loading Complete", "platform data received\nData : $platformnsList")
+                Log.d("Loading Complete", "platform data received\nData : $platformsList")
 
                 rankingDataList.clear()
-                val size = platformnsList.size
+                val size = platformsList.size
 
 
                 for (i in 0 until size) {
                     rankingDataList.add(rankData())
                     for (j in 0 until 5) {
                         isWorkGoingOnForRankData++
-                        loadRankingDataPlatformWise(getUsernameByIndex(platformnsList[i], j), j, i)
+                        loadRankingDataPlatformWise(getUsernameByIndex(platformsList[i], j), j, i)
                     }
                 }
 
@@ -216,14 +230,14 @@ class MainActivity2 : AppCompatActivity() {
 
                 Log.e("Ranking Data List", "Data is :$rankingDataList")
 
-                userdao.setRankingDataToDatabase(
+                userDao.setRankingDataToDatabase(
                     this,
                     rankingDataList,
                     forecedRefreshData,
                     forecedRefreshingTheDataINProgress
                 )
 
-                while (userdao.isWorkingForced) {
+                while (userDao.isWorkingForced) {
                     Thread.sleep(500)
                     Log.e("wait", "waiting for confirmation about isworkingForced")
                 }
@@ -234,28 +248,382 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+
+
+
+
+
+//    All CONTEST TIMINGS DATA STUFF
+
+    //    listeners setter for contest timing choice buttons ( ongoing || Upcoming )
+    private fun contestTimingButtonsSetter() {
+        ongoing.setOnClickListener {
+            if (contestTimingIdex == 1) {
+                contestTimingIdex = 0
+                checkAndHandleViews()
+                updatedContestListData()
+                upcoming.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                upcoming.background = null
+                ongoing.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                ongoing.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+        }
+        upcoming.setOnClickListener {
+            if (contestTimingIdex == 0) {
+                contestTimingIdex = 1
+                checkAndHandleViews()
+                updatedContestListData()
+                ongoing.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                ongoing.background = null
+                upcoming.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                upcoming.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+        }
+
+    }
+    private fun onclickListenersForContestButtons() {
+        hackerrank.setOnClickListener {
+            if (contestPlatformIndex != 0) {
+                loadingDataViewsChangeForContestsList()
+
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(0)
+                contestPlatformIndex = 0
+                fetchAndSetContestData()
+            }
+        }
+        codechef.setOnClickListener {
+            if (contestPlatformIndex != 1) {
+                loadingDataViewsChangeForContestsList()
+
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(1)
+                contestPlatformIndex = 1
+                fetchAndSetContestData()
+            }
+        }
+        codeforces.setOnClickListener {
+            if (contestPlatformIndex != 2) {
+                loadingDataViewsChangeForContestsList()
+
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(2)
+                contestPlatformIndex = 2
+                fetchAndSetContestData()
+            }
+        }
+        topCoder.setOnClickListener {
+            if (contestPlatformIndex != 3) {
+                loadingDataViewsChangeForContestsList()
+
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(3)
+                contestPlatformIndex = 3
+                fetchAndSetContestData()
+            }
+        }
+        hacker_earth.setOnClickListener {
+            loadingDataViewsChangeForContestsList()
+
+            if (contestPlatformIndex != 4) {
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(4)
+                contestPlatformIndex = 4
+                fetchAndSetContestData()
+            }
+        }
+        leetCode.setOnClickListener {
+            loadingDataViewsChangeForContestsList()
+
+            if (contestPlatformIndex != 5) {
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(5)
+                contestPlatformIndex = 5
+                fetchAndSetContestData()
+            }
+        }
+        atCoder.setOnClickListener {
+            loadingDataViewsChangeForContestsList()
+
+            if (contestPlatformIndex != 6) {
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(6)
+                contestPlatformIndex = 6
+                fetchAndSetContestData()
+            }
+        }
+        kickStart.setOnClickListener {
+            loadingDataViewsChangeForContestsList()
+
+            if (contestPlatformIndex != 7) {
+                turnCurrentNonSelectedForContestList()
+                turnToSelectedForContestsList(7)
+                contestPlatformIndex = 7
+                fetchAndSetContestData()
+            }
+        }
+
+    }
+    //    change Background of currant selected button of individual data platform buttons to null
+    private fun turnCurrentNonSelectedForContestList() {
+
+
+        when (contestPlatformIndex) {
+            0 -> {
+                hackerrank.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                hackerrank.background = null
+            }
+            1 -> {
+                codechef.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                codechef.background = null
+            }
+            2 -> {
+                codeforces.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                codeforces.background = null
+            }
+            3 -> {
+                topCoder.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                topCoder.background = null
+            }
+            4 -> {
+                hacker_earth.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.textcolorNonSelected
+                    )
+                )
+                hacker_earth.background = null
+            }
+            5 -> {
+                leetCode.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                leetCode.background = null
+            }
+            6 -> {
+                atCoder.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                atCoder.background = null
+            }
+            7 -> {
+                kickStart.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
+                kickStart.background = null
+            }
+
+        }
+    }
+    //    Change background of clicked platform button to selected
+    private fun turnToSelectedForContestsList(i: Int) {
+        when (i) {
+            0 -> {
+                hackerrank.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                hackerrank.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            1 -> {
+                codechef.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                codechef.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            2 -> {
+                codeforces.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                codeforces.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            3 -> {
+                topCoder.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                topCoder.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            4 -> {
+                hacker_earth.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.whitemain
+                    )
+                )
+                hacker_earth.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            5 -> {
+                leetCode.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                leetCode.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            6 -> {
+                atCoder.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                atCoder.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+            7 -> {
+                kickStart.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
+                kickStart.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
+            }
+
+        }
+
+    }
+    //    Loads and set data to the recycler view of contest data by volley request
+    private fun fetchAndSetContestData() {
+
+
+        val queue = Volley.newRequestQueue(this)
+        GlobalScope.launch(Dispatchers.IO) {
+
+            try {
+                val stringRequest =
+                    StringRequest(
+                        Request.Method.GET,
+                        contestBaseUrl + contestPlatformQuery[contestPlatformIndex],
+                        { response ->
+                            Log.d(
+                                "data received",
+                                "Response is: ${response.toString()}, \n length : ${
+                                    JSONArray(
+                                        response
+                                    ).length()
+                                }"
+                            )
+
+                            devideList(JSONArray(response))
+                            checkAndHandleViews()
+                            updatedContestListData()
+                        },
+                        { error ->
+                            Log.e("Errordata Fetching", error.toString())
+                            if (error.networkResponse != null && error.networkResponse.statusCode == 200) {
+                                showNoDataAvailableForContest()
+                            }
+                        })
+
+                queue.add(stringRequest)
+
+            } catch (error: Error) {
+                Log.e(
+                    "Contest Data Error",
+                    "Error Occurred While fetching data :\n \tError : ${error.toString()}"
+                )
+//                errorWhileLoadingContestsDataViewsAdjustment()
+            }
+
+        }
+    }
+    //    Error Handling in contest data list
+    private fun loadingDataViewsChangeForContestsList() {
+        if (errorInContestDataLayout.visibility == View.VISIBLE) {
+            errorInContestDataLayout.visibility = View.GONE
+        }
+        contestDetailsList.visibility = View.GONE
+        loadingContestData.visibility = View.VISIBLE
+    }
+    //    setup Recycler VIew According to timings choice
+    private fun updatedContestListData() {
+        contestDetailsList.layoutManager = LinearLayoutManager(this)
+        val ad: contest_list_adapter
+        if (contestTimingIdex == 0) {
+            if (currantTimings.size != 0) {
+                ad = contest_list_adapter(currantTimings.toTypedArray())
+                contestDetailsList.adapter = ad
+//                rankListRecyclerView.adapter = ad
+
+            } else {
+                showNoDataAvailableForContest()
+            }
+        } else {
+            if (futureTimings.size != 0) {
+                ad = contest_list_adapter(futureTimings.toTypedArray())
+                contestDetailsList.adapter = ad
+            } else {
+                showNoDataAvailableForContest()
+            }
+
+        }
+
+    }
+    //    Devide contest timing data list into upcoming and ongoing list
+    private fun devideList(jsonArray: JSONArray) {
+
+        currantTimings.clear()
+        futureTimings.clear()
+
+
+        var tempschedualeObj: contestTimings
+        var tempJsonObject: JSONObject
+        val lengthObj = jsonArray.length()
+
+
+        for (i in 0 until lengthObj) {
+            tempJsonObject = jsonArray.getJSONObject(i)
+            tempschedualeObj = contestTimings(
+                tempJsonObject.getString("name"),
+                timeFormatterForContestList(tempJsonObject.getString("start_time")),
+                timeFormatterForContestList(tempJsonObject.getString("end_time"))
+            )
+            if (tempJsonObject.getString("status") == "CODING") {
+                currantTimings.add(tempschedualeObj)
+            } else {
+                futureTimings.add(tempschedualeObj)
+            }
+        }
+
+        Log.d(
+            "data division",
+            "length of ongoing contests list : ${currantTimings.size}  \n length of future contest list : ${futureTimings.size}"
+        )
+    }
+    //    Format time for loaded data ( form GMT to IST)
+    private fun timeFormatterForContestList(string: String): String {
+
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+        val outputFormat = SimpleDateFormat("dd-MM-yyyy\nHH:mm", Locale.ENGLISH)
+        outputFormat.timeZone = TimeZone.getTimeZone("GMT+11")
+
+        val date: Date = inputFormat.parse(string)!!
+        val formattedDate: String = outputFormat.format(date)
+        Log.e("TIME CHECK WO O", "Result is :$formattedDate")
+
+        return formattedDate
+
+    }
+    //    make list visible when data loaded
+    private fun checkAndHandleViews() {
+
+        loadingContestData.visibility = View.GONE
+
+        if (contestDetailsList.visibility == View.GONE) {
+            contestDetailsList.visibility = View.VISIBLE
+        }
+        if (errorInContestDataLayout.visibility == View.VISIBLE) {
+            errorInContestDataLayout.visibility = View.GONE
+        }
+    }
+    //    Error handling
+    private fun showNoDataAvailableForContest() {
+        contestDetailsList.visibility = View.GONE
+        errorInContestDataLayout.visibility = View.VISIBLE
+    }
+
+
+
+
+
+
+
+//    All INDIVIDUAL DATA STUFF
+
+    //    set Up listeners for self progress data listeners
     private fun individualDataButtonsOnClickListenersSetter() {
         codechefForSelfProgress.setOnClickListener {
-            if (curruntSelectedPlatformForSelfProgress != 0) {
+            if (currantSelectedPlatformForSelfProgress != 0) {
 
                 Log.e("Individual Data", "Data is :${individualDataObj.codechefDataI}")
 
                 setUpIndividualDataListRecyclerView(0)
-                turnCurruntNonSelectedForIndividualData()
-                curruntSelectedPlatformForSelfProgress = 0
+                turnCurrentNonSelectedForIndividualData()
+                currantSelectedPlatformForSelfProgress = 0
                 turnToSelectedForIndividualData()
 
             }
         }
         codeforcesForSelfProgress.setOnClickListener {
-            if (curruntSelectedPlatformForSelfProgress != 1) {
+            if (currantSelectedPlatformForSelfProgress != 1) {
 
                 Log.e("Individual Data", "Data is :${individualDataObj.codeForcesDataI}")
 
 
                 setUpIndividualDataListRecyclerView(1)
-                turnCurruntNonSelectedForIndividualData()
-                curruntSelectedPlatformForSelfProgress = 1
+                turnCurrentNonSelectedForIndividualData()
+                currantSelectedPlatformForSelfProgress = 1
                 turnToSelectedForIndividualData()
 
             }
@@ -265,10 +633,10 @@ class MainActivity2 : AppCompatActivity() {
             Log.e("Individual Data", "Data is :${individualDataObj.spojDataI}")
 
 
-            if (curruntSelectedPlatformForSelfProgress != 2) {
+            if (currantSelectedPlatformForSelfProgress != 2) {
                 setUpIndividualDataListRecyclerView(2)
-                turnCurruntNonSelectedForIndividualData()
-                curruntSelectedPlatformForSelfProgress = 2
+                turnCurrentNonSelectedForIndividualData()
+                currantSelectedPlatformForSelfProgress = 2
                 turnToSelectedForIndividualData()
 
             }
@@ -276,10 +644,10 @@ class MainActivity2 : AppCompatActivity() {
         interviewBitForSelfProgress.setOnClickListener {
             Log.e("Individual Data", "Data is :${individualDataObj.interviewBitDataI}")
 
-            if (curruntSelectedPlatformForSelfProgress != 3) {
+            if (currantSelectedPlatformForSelfProgress != 3) {
                 setUpIndividualDataListRecyclerView(3)
-                turnCurruntNonSelectedForIndividualData()
-                curruntSelectedPlatformForSelfProgress = 3
+                turnCurrentNonSelectedForIndividualData()
+                currantSelectedPlatformForSelfProgress = 3
                 turnToSelectedForIndividualData()
 
             }
@@ -289,17 +657,17 @@ class MainActivity2 : AppCompatActivity() {
             Log.e("Individual Data", "Data is :${individualDataObj.leetCodeDataI}")
 
 
-            if (curruntSelectedPlatformForSelfProgress != 4) {
+            if (currantSelectedPlatformForSelfProgress != 4) {
                 setUpIndividualDataListRecyclerView(4)
-                turnCurruntNonSelectedForIndividualData()
-                curruntSelectedPlatformForSelfProgress = 4
+                turnCurrentNonSelectedForIndividualData()
+                currantSelectedPlatformForSelfProgress = 4
                 turnToSelectedForIndividualData()
             }
         }
     }
-
+    //    change Background of currant selected button of individual data platform buttons to null
     private fun turnToSelectedForIndividualData() {
-        when (curruntSelectedPlatformForSelfProgress) {
+        when (currantSelectedPlatformForSelfProgress) {
 
             0 -> {
                 codechefForSelfProgress.setTextColor(
@@ -347,10 +715,10 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
     }
+    //    Change background of clicked platform button to selected
+    private fun turnCurrentNonSelectedForIndividualData() {
 
-    private fun turnCurruntNonSelectedForIndividualData() {
-
-        when (curruntSelectedPlatformForSelfProgress) {
+        when (currantSelectedPlatformForSelfProgress) {
             0 -> {
                 codechefForSelfProgress.setTextColor(
                     ContextCompat.getColor(
@@ -399,6 +767,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+    //    Individual Data recycler view setter when platform changed
     private fun setUpIndividualDataListRecyclerView(i: Int) {
         if (individualDataObj.dataStatus[i]) {
             when (i) {
@@ -457,29 +826,35 @@ class MainActivity2 : AppCompatActivity() {
     }
 
 
-    private fun setUpOnClickListenersForLeaderboardDataButtons() {
+
+
+
+
+
+//    ALL LEADERBOARD STUFF
+
+    //    set Up listeners for leaderBoard platform selector
+    private fun setUpOnClickListenersForLeaderBoardDataButtons() {
         codechefForRank.setOnClickListener {
             if (curruntSelectedPlatformLeadeBoard != 0) {
                 setUpRankListRecyclerView(0)
-                turnCurruntNonSelectedForLeaderBoard()
+                turnCurrentNonSelectedForLeaderBoard()
                 curruntSelectedPlatformLeadeBoard = 0
                 turnToSelectedForLeaderBoard()
-
             }
         }
         codeforcesForRank.setOnClickListener {
             if (curruntSelectedPlatformLeadeBoard != 1) {
                 setUpRankListRecyclerView(1)
-                turnCurruntNonSelectedForLeaderBoard()
+                turnCurrentNonSelectedForLeaderBoard()
                 curruntSelectedPlatformLeadeBoard = 1
                 turnToSelectedForLeaderBoard()
-
             }
         }
         spojForRank.setOnClickListener {
             if (curruntSelectedPlatformLeadeBoard != 2) {
                 setUpRankListRecyclerView(2)
-                turnCurruntNonSelectedForLeaderBoard()
+                turnCurrentNonSelectedForLeaderBoard()
                 curruntSelectedPlatformLeadeBoard = 2
                 turnToSelectedForLeaderBoard()
 
@@ -488,7 +863,7 @@ class MainActivity2 : AppCompatActivity() {
         interviewBitForRank.setOnClickListener {
             if (curruntSelectedPlatformLeadeBoard != 3) {
                 setUpRankListRecyclerView(3)
-                turnCurruntNonSelectedForLeaderBoard()
+                turnCurrentNonSelectedForLeaderBoard()
                 curruntSelectedPlatformLeadeBoard = 3
                 turnToSelectedForLeaderBoard()
 
@@ -497,13 +872,12 @@ class MainActivity2 : AppCompatActivity() {
         leetCodeForRank.setOnClickListener {
             if (curruntSelectedPlatformLeadeBoard != 4) {
                 setUpRankListRecyclerView(4)
-                turnCurruntNonSelectedForLeaderBoard()
+                turnCurrentNonSelectedForLeaderBoard()
                 curruntSelectedPlatformLeadeBoard = 4
                 turnToSelectedForLeaderBoard()
             }
         }
     }
-
     private fun turnToSelectedForLeaderBoard() {
         when (curruntSelectedPlatformLeadeBoard) {
             0 -> {
@@ -530,8 +904,7 @@ class MainActivity2 : AppCompatActivity() {
 
 
     }
-
-    private fun turnCurruntNonSelectedForLeaderBoard() {
+    private fun turnCurrentNonSelectedForLeaderBoard() {
         when (curruntSelectedPlatformLeadeBoard) {
             0 -> {
                 codechefForRank.setTextColor(
@@ -575,19 +948,18 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
     }
-
-    fun setUpRankListRecyclerView(platformI: Int) {
+    private fun setUpRankListRecyclerView(platformI: Int) {
         Thread {
 
-            if (userdao.compareVol()) {
-                userdao.setupLeaderboardCollection()
-                while (userdao.compareVol()) {
+            if (userDao.compareVol()) {
+                userDao.setupLeaderboardCollection()
+                while (userDao.compareVol()) {
                     Thread.sleep(1000)
                 }
             }
 
             val collectionForLeaderBoard: CollectionReference =
-                userdao.collectionForRankList
+                userDao.collectionForRankList
 
             Log.e("assign Success", "collection assigned to $collectionForLeaderBoard")
 
@@ -612,39 +984,40 @@ class MainActivity2 : AppCompatActivity() {
 
     }
 
-    private val updateTextTask = object : Runnable {
+    //    Task called every 5 minutes to check when last data updating was and if it is more than and hour it updates data
+    private val updateLeaderBoardDataOfAll = object : Runnable {
         override fun run() {
 
-            updateLeaderboardDataOfDatabase()
+            updateLeaderBoardDataOfDatabase()
             mainHandler.postDelayed(this, 300000)
         }
     }
-
-    private fun updateLeaderboardDataOfDatabase() {
+    //    This Function is being called by the task every 5 minutes
+    private fun updateLeaderBoardDataOfDatabase() {
 
         Thread {
 
             Log.e("Confirmation", "being called")
 
-            userdao.checkDataRefreshingNessecityAndUpdateAcc(platformnsList)
-            while (userdao.isWorking) {
+            userDao.checkDataRefreshingNessecityAndUpdateAcc(platformsList)
+            while (userDao.isWorking) {
                 Thread.sleep(1000)
                 Log.e("wait", "waiting")
 
             }
 
-            Log.d("Loading Complete", "platform data received\nData : $platformnsList")
+            Log.d("Loading Complete", "platform data received\nData : $platformsList")
 
-            if (userdao.nessecityForUpdation) {
+            if (userDao.nessecityForUpdation) {
                 rankingDataList.clear()
-                val size = platformnsList.size
+                val size = platformsList.size
 
 
                 for (i in 0 until size) {
                     rankingDataList.add(rankData())
                     for (j in 0 until 5) {
                         isWorkGoingOnForRankData++
-                        loadRankingDataPlatformWise(getUsernameByIndex(platformnsList[i], j), j, i)
+                        loadRankingDataPlatformWise(getUsernameByIndex(platformsList[i], j), j, i)
                     }
                 }
 
@@ -654,7 +1027,7 @@ class MainActivity2 : AppCompatActivity() {
                 }
 
 
-                userdao.setRankingDataToDatabase(
+                userDao.setRankingDataToDatabase(
                     this,
                     rankingDataList,
                     null,
@@ -666,29 +1039,7 @@ class MainActivity2 : AppCompatActivity() {
         }.start()
     }
 
-    private fun getUsernameByIndex(platformsList: platforms_list, j: Int): String {
-        when (j) {
-            0 -> {
-                return platformsList.codechef
-            }
-            1 -> {
-                return platformsList.codeforces
-            }
-            2 -> {
-                return platformsList.spoj
-            }
-            3 -> {
-                return platformsList.interviewBit
-            }
-            4 -> {
-                return platformsList.leetCode
-            }
-            else -> {
-                return platformsList.codechef
-            }
-        }
-    }
-
+    //    Fetches the ranking data to uplopad by volley request
     private fun loadRankingDataPlatformWise(
         handleProvided: String,
         platformI: Int,
@@ -776,7 +1127,30 @@ class MainActivity2 : AppCompatActivity() {
 
         }
     }
-
+    //    When fetching user data from apis, to avoid repeatation this function returns username for queries by index and returns by default codeChef username if there is any error
+    private fun getUsernameByIndex(platformsList: platforms_list, j: Int): String {
+        when (j) {
+            0 -> {
+                return platformsList.codechef
+            }
+            1 -> {
+                return platformsList.codeforces
+            }
+            2 -> {
+                return platformsList.spoj
+            }
+            3 -> {
+                return platformsList.interviewBit
+            }
+            4 -> {
+                return platformsList.leetCode
+            }
+            else -> {
+                return platformsList.codechef
+            }
+        }
+    }
+    //    to avoid repeatation this function set data to rankData list of Rank data class by index query instead of platform
     private fun setThisDataToRankData(i: Double, platformI: Int, lastIndex: Int) {
 
         when (platformI) {
@@ -798,7 +1172,7 @@ class MainActivity2 : AppCompatActivity() {
         }
 
     }
-
+    //    as all platforms have different response for query , to avoid repeatation this is used
     private fun findRankingDataFromJson(jsonData: JSONObject, platformI: Int): Double {
         when (platformI) {
             0 -> {
@@ -827,193 +1201,31 @@ class MainActivity2 : AppCompatActivity() {
     }
 
 
-    private fun contestTimingButtonsSetter() {
-        ongoing.setOnClickListener {
-            if (contestTimingIdex == 1) {
-                contestTimingIdex = 0
-                checkAndHandleViews()
-                updatedContestListData()
-                upcoming.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                upcoming.background = null
-                ongoing.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                ongoing.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-        }
-        upcoming.setOnClickListener {
-            if (contestTimingIdex == 0) {
-                contestTimingIdex = 1
-                checkAndHandleViews()
-                updatedContestListData()
-                ongoing.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                ongoing.background = null
-                upcoming.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                upcoming.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-        }
-
-    }
 
 
-    private fun fetchAndSetContestData() {
 
 
-        val queue = Volley.newRequestQueue(this)
-        GlobalScope.launch(Dispatchers.IO) {
-
-            try {
-                val stringRequest =
-                    StringRequest(
-                        Request.Method.GET,
-                        contestBaseUrl + contestPlatformQuery[contestplatformIndex],
-                        { response ->
-                            Log.d(
-                                "data received",
-                                "Response is: ${response.toString()}, \n length : ${
-                                    JSONArray(
-                                        response
-                                    ).length()
-                                }"
-                            )
-
-                            devideList(JSONArray(response))
-                            checkAndHandleViews()
-                            updatedContestListData()
-                        },
-                        { error ->
-                            Log.e("Errordata Fetching", error.toString())
-                            if (error.networkResponse != null && error.networkResponse.statusCode == 200) {
-                                showNoDataAvailableForContest()
-                            }
-                        })
-
-                queue.add(stringRequest)
-
-            } catch (error: Error) {
-                Log.e(
-                    "Contest Data Error",
-                    "Error Occurred While fetching data :\n \tError : ${error.toString()}"
-                )
-//                errorWhileLoadingContestsDataViewsAdjustment()
-            }
-
-        }
-    }
-
-    private fun loadingDataViewsChangeForContestsList() {
-        if (errorInContestDataLayout.visibility == View.VISIBLE) {
-            errorInContestDataLayout.visibility = View.GONE
-        }
-        contestDetailsList.visibility = View.GONE
-        loadingContestData.visibility = View.VISIBLE
-    }
-
-    private fun updatedContestListData() {
-        contestDetailsList.layoutManager = LinearLayoutManager(this)
-        val ad: contest_list_adapter
-        if (contestTimingIdex == 0) {
-            if (curruntTimings.size != 0) {
-                ad = contest_list_adapter(curruntTimings.toTypedArray())
-                contestDetailsList.adapter = ad
-//                rankListRecyclerView.adapter = ad
-
-            } else {
-                showNoDataAvailableForContest()
-            }
-        } else {
-            if (futureTimings.size != 0) {
-                ad = contest_list_adapter(futureTimings.toTypedArray())
-                contestDetailsList.adapter = ad
-            } else {
-                showNoDataAvailableForContest()
-            }
-
-        }
-
-    }
 
 
-    private fun devideList(jsonArray: JSONArray) {
+//    BOTTOM NAV BAR STUFF
 
-        curruntTimings.clear()
-        futureTimings.clear()
-
-
-        var tempschedualeObj: contestTimings
-        var tempJsonObject: JSONObject
-        var lengthObj = jsonArray.length()
-
-
-        for (i in 0 until lengthObj) {
-            tempJsonObject = jsonArray.getJSONObject(i)
-            tempschedualeObj = contestTimings(
-                tempJsonObject.getString("name"),
-                timeFormatterForContestList(tempJsonObject.getString("start_time")),
-                timeFormatterForContestList(tempJsonObject.getString("end_time"))
-            )
-            if (tempJsonObject.getString("status") == "CODING") {
-                curruntTimings.add(tempschedualeObj)
-            } else {
-                futureTimings.add(tempschedualeObj)
-            }
-        }
-
-        Log.d(
-            "data division",
-            "length of ongoing contests list : ${curruntTimings.size}  \n length of future contest list : ${futureTimings.size}"
-        )
-    }
-
-
-    private fun timeFormatterForContestList(string: String): String {
-
-
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
-        val outputFormat = SimpleDateFormat("dd-MM-yyyy\nHH:mm", Locale.ENGLISH)
-        outputFormat.timeZone = TimeZone.getTimeZone("GMT+11")
-
-        val date: Date = inputFormat.parse(string)!!
-        val formattedDate: String = outputFormat.format(date)
-        Log.e("TIME CHECK WO O", "Result is :$formattedDate")
-
-        return formattedDate
-
-    }
-
-
-    private fun checkAndHandleViews() {
-
-        loadingContestData.visibility = View.GONE
-
-        if (contestDetailsList.visibility == View.GONE) {
-            contestDetailsList.visibility = View.VISIBLE
-        }
-        if (errorInContestDataLayout.visibility == View.VISIBLE) {
-            errorInContestDataLayout.visibility = View.GONE
-        }
-    }
-
-    private fun showNoDataAvailableForContest() {
-        contestDetailsList.visibility = View.GONE
-        errorInContestDataLayout.visibility = View.VISIBLE
-    }
-
-
+    //    Setting Up bottom navigation Bar
     private fun bottomNavSetter() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.home -> {
-                    setCurruntLayout(0)
-                    curruntLayoutIndex = 0
+                    setCurrentLayout(0)
+                    currantLayoutIndex = 0
                 }
                 R.id.leaderBoard -> {
                     if (!hasBeenClickedBefore[1]) {
                         setUpRankListRecyclerView(0)
                         hasBeenClickedBefore[1] = true
                     }
-                    setCurruntLayout(1)
-                    curruntLayoutIndex = 1
+                    setCurrentLayout(1)
+                    currantLayoutIndex = 1
 
                 }
                 R.id.chats -> {
@@ -1022,8 +1234,8 @@ class MainActivity2 : AppCompatActivity() {
                         setUpChats()
                         hasBeenClickedBefore[2] = true
                     }
-                    setCurruntLayout(2)
-                    curruntLayoutIndex = 2
+                    setCurrentLayout(2)
+                    currantLayoutIndex = 2
                 }
                 R.id.profile -> {
 
@@ -1033,120 +1245,24 @@ class MainActivity2 : AppCompatActivity() {
                     }
 
 
-                    setCurruntLayout(3)
-                    curruntLayoutIndex = 3
+                    setCurrentLayout(3)
+                    currantLayoutIndex = 3
                 }
 
             }
             true
         }
     }
+    private fun setCurrentLayout(i: Int) {
 
-    private fun setUpProfileTop() {
-        Log.e("Called", "thread has been called00")
-
-        Thread {
-
-            Log.e("Called", "thread has been called")
-            runOnUiThread {
-                Glide
-                    .with(this)
-                    .load(randomAnimeImageUrlObj.url)
-                    .centerCrop()
-                    .placeholder(R.color.whitesecondary)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(personProfilePicture)
-
-
-
-            }
-
-            if (userdao.mainUsr == null) {
-                userdao.getUserDataByIDAndSet(null)
-            }
-
-            while (userdao.isworkingForGettingUserData) {
-                Thread.sleep(500)
-            }
-
-            Log.e("User Data Received", "User : ${userdao.mainUsr}")
-
-
-            runOnUiThread {
-                val tempUsr = userdao.mainUsr!!
-                setUpOnCLickByUserName(codeForcesLinkBtn, tempUsr.codeForcesHandle,0)
-                setUpOnCLickByUserName(codeChefLinkBtn, tempUsr.codeChefHandle,1)
-                setUpOnCLickByUserName(spoJLinkBtn, tempUsr.spojHandle,2)
-                setUpOnCLickByUserName(interviewBitLinkBtn, tempUsr.interviewBitHandle,2)
-                setUpOnCLickByUserName(leetCodeLinkBtn, tempUsr.leetCodeHandle,4)
-                setUpOnCLickByUserName(hackerRankLinkBtn, tempUsr.hackerRankHandle,5)
-                setUpOnCLickByUserName(gitHubLinkBtn, tempUsr.gitHubHandle,6)
-                setUpOnCLickByUserName(linkedInLinkBtn, tempUsr.linkedInHandle,7)
-                setUpOnCLickByUserName(instagramLinkBtn, tempUsr.instagramHandle,8)
-                setUpOnCLickByUserName(faceBookLinkBtn, tempUsr.facebookHandle,9)
-
-
-                personNameTextView.text = tempUsr.displayName
-                courseNameView.setTextColor(userdao.randomColorObj.getRnd())
-                instituteNameView.setTextColor(userdao.randomColorObj.getRnd())
-                courseNameView.text = tempUsr.courseName
-                instituteNameView.text = tempUsr.instituteName
-
-            }
-        }.start()
-
-    }
-
-
-    //                codeForcesLinkBtn: ImageButton,
-//                codeChefLinkBtn: ImageButton,
-//                spoJLinkBtn: ImageButton,
-//                interviewBitLinkBtn: ImageButton,
-//                leetCodeLinkBtn: ImageButton,
-//                hackerRankLinkBtn: ImageButton,
-//                gitHubLinkBtn: ImageButton,
-//                linkedInLinkBtn: ImageButton,
-//                instagramLinkBtn: ImageButton,
-//                faceBookLinkBtn: ImageButton,
-//                personNameTextView: TextView,
-//                courseNameView: TextView,
-//                instituteNameView: TextView
-
-
-//                private fun setUpLayoutForLinks(
-//                    tempUsr: Users,
-//
-//                ) {
-
-    private fun setUpOnCLickByUserName(btnGiven: ImageButton, handleGiven: String, i : Int) {
-
-        Log.e("Handle", "handle provided for $btnGiven is \n $handleGiven")
-        if (handleGiven!=""&&handleGiven!=" ") {
-            btnGiven.visibility = View.VISIBLE
-            btnGiven.setOnClickListener {
-                val openURL = Intent(android.content.Intent.ACTION_VIEW)
-                openURL.data = Uri.parse(gettUrlByHadle.getLink(handleGiven, i))
-                startActivity(openURL)
-            }
-        }
-    }
-
-
-    private fun setUpChats() {
-        chatDao.setUpChatRecyclerView(chatsRecyclerView)
-
-    }
-
-    private fun setCurruntLayout(i: Int) {
-
-        if (curruntLayoutIndex != i) {
+        if (currantLayoutIndex != i) {
             when (i) {
                 0 -> {
-                    if (curruntLayoutIndex == 3) {
+                    if (currantLayoutIndex == 3) {
                         profile_top_portion.visibility = View.GONE
                         homeContestsListDataContainer.visibility = View.VISIBLE
                     } else {
-                        if (curruntLayoutIndex == 1) {
+                        if (currantLayoutIndex == 1) {
                             leaderBoardLayout.visibility = View.GONE
                         } else {
                             chatLayout.visibility = View.GONE
@@ -1158,9 +1274,9 @@ class MainActivity2 : AppCompatActivity() {
                     }
                 }
                 1 -> {
-                    if (curruntLayoutIndex == 0 || curruntLayoutIndex == 3) {
+                    if (currantLayoutIndex == 0 || currantLayoutIndex == 3) {
                         individualDataConstrainLayoutContainer.visibility = View.GONE
-                        if (curruntLayoutIndex == 0) {
+                        if (currantLayoutIndex == 0) {
                             homeContestsListDataContainer.visibility = View.GONE
                         } else {
                             profile_top_portion.visibility = View.GONE
@@ -1174,9 +1290,9 @@ class MainActivity2 : AppCompatActivity() {
                 2 -> {
 
                     Log.e("Chats", "Being called")
-                    if (curruntLayoutIndex == 0 || curruntLayoutIndex == 3) {
+                    if (currantLayoutIndex == 0 || currantLayoutIndex == 3) {
                         individualDataConstrainLayoutContainer.visibility = View.GONE
-                        if (curruntLayoutIndex == 0) {
+                        if (currantLayoutIndex == 0) {
                             homeContestsListDataContainer.visibility = View.GONE
                         } else {
                             profile_top_portion.visibility = View.GONE
@@ -1188,11 +1304,11 @@ class MainActivity2 : AppCompatActivity() {
                     chatLayout.visibility = View.VISIBLE
                 }
                 3 -> {
-                    if (curruntLayoutIndex == 0) {
+                    if (currantLayoutIndex == 0) {
                         homeContestsListDataContainer.visibility = View.GONE
                         profile_top_portion.visibility = View.VISIBLE
                     } else {
-                        if (curruntLayoutIndex == 1) {
+                        if (currantLayoutIndex == 1) {
                             leaderBoardLayout.visibility = View.GONE
                         } else {
                             chatLayout.visibility = View.GONE
@@ -1207,178 +1323,88 @@ class MainActivity2 : AppCompatActivity() {
     }
 
 
-    private fun onclickListenersForcontestButtons() {
-        hackerrank.setOnClickListener {
-            if (contestplatformIndex != 0) {
-                loadingDataViewsChangeForContestsList()
 
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(0)
-                contestplatformIndex = 0
-                fetchAndSetContestData()
-            }
-        }
-        codechef.setOnClickListener {
-            if (contestplatformIndex != 1) {
-                loadingDataViewsChangeForContestsList()
 
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(1)
-                contestplatformIndex = 1
-                fetchAndSetContestData()
-            }
-        }
-        codeforces.setOnClickListener {
-            if (contestplatformIndex != 2) {
-                loadingDataViewsChangeForContestsList()
 
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(2)
-                contestplatformIndex = 2
-                fetchAndSetContestData()
-            }
-        }
-        topCoder.setOnClickListener {
-            if (contestplatformIndex != 3) {
-                loadingDataViewsChangeForContestsList()
 
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(3)
-                contestplatformIndex = 3
-                fetchAndSetContestData()
-            }
-        }
-        hacker_earth.setOnClickListener {
-            loadingDataViewsChangeForContestsList()
+//    PROFILE STUFF
 
-            if (contestplatformIndex != 4) {
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(4)
-                contestplatformIndex = 4
-                fetchAndSetContestData()
-            }
-        }
-        leetCode.setOnClickListener {
-            loadingDataViewsChangeForContestsList()
+    //    Updates profile data
+    private fun setUpProfileTop() {
+        Log.e("Called", "thread has been called00")
 
-            if (contestplatformIndex != 5) {
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(5)
-                contestplatformIndex = 5
-                fetchAndSetContestData()
-            }
-        }
-        atCoder.setOnClickListener {
-            loadingDataViewsChangeForContestsList()
+        Thread {
 
-            if (contestplatformIndex != 6) {
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(6)
-                contestplatformIndex = 6
-                fetchAndSetContestData()
-            }
-        }
-        kickStart.setOnClickListener {
-            loadingDataViewsChangeForContestsList()
+            Log.e("Called", "thread has been called")
+            runOnUiThread {
+                Glide
+                    .with(this)
+                    .load(randomAnimeImageUrlObj.url)
+                    .centerCrop()
+                    .error(R.color.whitesecondary)
+                    .placeholder(R.color.whitesecondary)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(personProfilePicture)
 
-            if (contestplatformIndex != 7) {
-                turnCurruntNonSelectedForContestList()
-                turnToSelectedForContestsList(7)
-                contestplatformIndex = 7
-                fetchAndSetContestData()
             }
-        }
+
+            if (userDao.mainUsr == null) {
+                userDao.getUserDataByIDAndSet(null)
+            }
+
+            while (userDao.isworkingForGettingUserData) {
+                Thread.sleep(500)
+            }
+
+            Log.e("User Data Received", "User : ${userDao.mainUsr}")
+
+
+            runOnUiThread {
+                val tempUsr = userDao.mainUsr!!
+                setUpOnCLickByUserName(codeForcesLinkBtn, tempUsr.codeForcesHandle,0)
+                setUpOnCLickByUserName(codeChefLinkBtn, tempUsr.codeChefHandle,1)
+                setUpOnCLickByUserName(spoJLinkBtn, tempUsr.spojHandle,2)
+                setUpOnCLickByUserName(interviewBitLinkBtn, tempUsr.interviewBitHandle,2)
+                setUpOnCLickByUserName(leetCodeLinkBtn, tempUsr.leetCodeHandle,4)
+                setUpOnCLickByUserName(hackerRankLinkBtn, tempUsr.hackerRankHandle,5)
+                setUpOnCLickByUserName(gitHubLinkBtn, tempUsr.gitHubHandle,6)
+                setUpOnCLickByUserName(linkedInLinkBtn, tempUsr.linkedInHandle,7)
+                setUpOnCLickByUserName(instagramLinkBtn, tempUsr.instagramHandle,8)
+                setUpOnCLickByUserName(faceBookLinkBtn, tempUsr.facebookHandle,9)
+
+
+                personNameTextView.text = tempUsr.displayName
+                courseNameView.setTextColor(userDao.randomColorObj.getRnd())
+                instituteNameView.setTextColor(userDao.randomColorObj.getRnd())
+                courseNameView.text = tempUsr.courseName
+                instituteNameView.text = tempUsr.instituteName
+
+            }
+        }.start()
 
     }
+    //    Set on click listeners to the profile link buttons and
+    private fun setUpOnCLickByUserName(btnGiven: ImageButton, handleGiven: String, i : Int) {
 
-    private fun turnCurruntNonSelectedForContestList() {
-
-
-        when (contestplatformIndex) {
-            0 -> {
-                hackerrank.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                hackerrank.background = null
+        Log.e("Handle", "handle provided for $btnGiven is \n $handleGiven")
+        if (handleGiven!=""&&handleGiven!=" ") {
+            btnGiven.visibility = View.VISIBLE
+            btnGiven.setOnClickListener {
+                val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                openURL.data = Uri.parse(getUrlByHandle.getLink(handleGiven, i))
+                startActivity(openURL)
             }
-            1 -> {
-                codechef.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                codechef.background = null
-            }
-            2 -> {
-                codeforces.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                codeforces.background = null
-            }
-            3 -> {
-                topCoder.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                topCoder.background = null
-            }
-            4 -> {
-                hacker_earth.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.textcolorNonSelected
-                    )
-                )
-                hacker_earth.background = null
-            }
-            5 -> {
-                leetCode.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                leetCode.background = null
-            }
-            6 -> {
-                atCoder.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                atCoder.background = null
-            }
-            7 -> {
-                kickStart.setTextColor(ContextCompat.getColor(this, R.color.textcolorNonSelected))
-                kickStart.background = null
-            }
-
         }
     }
 
 
-    private fun turnToSelectedForContestsList(i: Int) {
-        when (i) {
-            0 -> {
-                hackerrank.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                hackerrank.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            1 -> {
-                codechef.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                codechef.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            2 -> {
-                codeforces.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                codeforces.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            3 -> {
-                topCoder.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                topCoder.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            4 -> {
-                hacker_earth.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.whitemain
-                    )
-                )
-                hacker_earth.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            5 -> {
-                leetCode.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                leetCode.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            6 -> {
-                atCoder.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                atCoder.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
-            7 -> {
-                kickStart.setTextColor(ContextCompat.getColor(this, R.color.whitemain))
-                kickStart.background = ContextCompat.getDrawable(this, R.drawable.grey_bg)
-            }
 
-        }
+
+    private fun setUpChats() {
+        chatDao.setUpChatRecyclerView(chatsRecyclerView)
 
     }
+
+
 
 }

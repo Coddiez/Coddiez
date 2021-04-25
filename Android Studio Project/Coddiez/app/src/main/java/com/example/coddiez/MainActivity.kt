@@ -27,40 +27,171 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-
+    //    Declarations
+    //    FIdeas Auth
     private lateinit var auth: FirebaseAuth
+
+    //    For knowing currant status of app (signUp / SignIN screen)
+    private var crntStats: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
     }
 
-    private var selectedItemInInstitiute: String = ""
-    private var selectedIteminYear: Int = 0
 
-
-    private var crntStats: Boolean = false
-    private var instituteArrayIndex: Int = 0
-    private var yearArrayIndex: Int = 0
-
-
+    // Check if user is signed in (non-null) and update UI accordingly.
+    // If User is not signed In then set up all listeners and spinners
     public override fun onStart() {
         // Initialize Firebase Auth
         auth = Firebase.auth
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
             updateUI(currentUser)
         } else {
-            initall()
+            initAll()
         }
 
     }
 
+    // Set Up spinners and listeners
+    // Redirected from onStart() when User Is not logged In
+    private fun initAll() {
 
+
+        val sdf = SimpleDateFormat("yyyy", Locale.ENGLISH)
+        val netDate = Date(System.currentTimeMillis())
+        val date = sdf.format(netDate)
+        Log.d("Date load", "Formatted Date : $date \ntimestami${System.currentTimeMillis()}")
+        val curruntYear = date.toInt()
+        val arrayOfYears = Array(5) {
+            yearAt(it, curruntYear)
+        }
+
+        val jsonArrayForInstituteNames: JSONArray = JSONObject(
+            getJsonDataFromAsset(
+                applicationContext,
+            )!!
+
+        ).getJSONArray("data")
+        val listOfInstituteNames = Array(jsonArrayForInstituteNames.length()) {
+            jsonArrayForInstituteNames.getString(it)
+        }
+        Log.d("Successfully parse Inst", " List : ${listOfInstituteNames.toString()}")
+
+
+        val spinner1 = findViewById<Spinner>(R.id.spinner1)
+        val spinner2 = findViewById<Spinner>(R.id.spinner2)
+
+        textToJumpToSignIn.setOnClickListener {
+            signUpxml.visibility = View.GONE
+            signInxml.visibility = View.VISIBLE
+            crntStats = true
+        }
+        textToJumpToSignUp.setOnClickListener {
+            signInxml.visibility = View.GONE
+            signUpxml.visibility = View.VISIBLE
+            crntStats = false
+        }
+
+        signInBtn.setOnClickListener {
+            if (allOkayForSignIn()) {
+                signIn(emailEdittextForSignIn.text.toString(), passwordForSignIn.text.toString())
+            }
+        }
+
+        signupBtn.setOnClickListener {
+
+            if (allOkayForSignUp()) {
+                signUp(email_edittext.text.toString(), confirm_password_edittext.text.toString())
+            }
+
+        }
+        if (spinner1 != null) {
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                listOfInstituteNames
+            )
+            spinner1.adapter = adapter
+            spinner1.background.setColorFilter(
+                resources.getColor(R.color.whitemain),
+                PorterDuff.Mode.SRC_ATOP
+            )
+
+
+            spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    (parent.getChildAt(0) as TextView).textSize = 18f
+                    (parent.getChildAt(0) as TextView).setTextColor(resources.getColor(R.color.whitemain))
+                    val externalFont = Typeface.createFromAsset(assets, "productsanslight.ttf")
+                    (view as TextView).setTypeface(externalFont)
+
+
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+        }
+        if (spinner2 != null) {
+            val adapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayOfYears)
+            spinner2.adapter = adapter
+            spinner2.background.setColorFilter(
+                resources.getColor(R.color.whitemain),
+                PorterDuff.Mode.SRC_ATOP
+            )
+
+            spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    (parent.getChildAt(0) as TextView).textSize = 18f
+                    (parent.getChildAt(0) as TextView).setTextColor(resources.getColor(R.color.whitemain))
+                    val externalFont = Typeface.createFromAsset(assets, "productsanslight.ttf")
+                    (view as TextView).setTypeface(externalFont)
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+    }
+    //   Used in initializing Year spinner array
+    private fun yearAt(it: Int, curruntYear: Int): Int {
+        return curruntYear + it - 4
+
+    }
+    //    returns string fetched from Assets Folder to setup in spinner for institute names
+    private fun getJsonDataFromAsset(context: Context): String? {
+        val jsonString: String
+        try {
+            jsonString = context.assets.open("data.json").bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return null
+        }
+        return jsonString
+    }
+
+
+
+    //    Basic Sign in Auth Redirects to Update Ui
     private fun signIn(email: String, password: String) {
 
         progressbar.visibility = View.VISIBLE
@@ -90,7 +221,7 @@ class MainActivity : AppCompatActivity() {
             }
 
     }
-
+    //    Checking signing in requirements like is both EditText are filled, password is > 6 length
     private fun allOkayForSignIn(): Boolean {
         if (emailEdittextForSignIn.text.isEmpty()) {
             doToastFor("E-mail")
@@ -110,6 +241,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
+    //    Basic SIgn Up Auth Redirects to Update Ui
+    private fun signUp(email: String, password: String) {
+
+        progressbar.visibility = View.VISIBLE
+        if (signUpxml.visibility == View.VISIBLE) {
+            signUpxml.visibility = View.GONE
+        }
+        if (signInxml.visibility == View.VISIBLE) {
+            signInxml.visibility = View.GONE
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("successfull signUp", "createUserWithEmail:success")
+                    val user = auth.currentUser
+
+                    uploadDataForFirstTime(user)
+
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("signup failes", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, " ${task.exception?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    updateUI(null)
+                }
+            }
+
+    }
+    //    Checking signing in requirements like is both EditText are filled, password is > 6 length
     private fun allOkayForSignUp(): Boolean {
 
 
@@ -161,43 +328,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun doToastFor(str: String) {
-        Toast.makeText(this@MainActivity, "$str field cannot be empty", Toast.LENGTH_SHORT).show()
-    }
 
-    private fun signUp(email: String, password: String) {
 
-        progressbar.visibility = View.VISIBLE
-        if (signUpxml.visibility == View.VISIBLE) {
-            signUpxml.visibility = View.GONE
-        }
-        if (signInxml.visibility == View.VISIBLE) {
-            signInxml.visibility = View.GONE
-        }
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("successfull signUp", "createUserWithEmail:success")
-                    val user = auth.currentUser
-
-                    uploadDataForFirstTime(user)
-
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("signup failes", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, " ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    updateUI(null)
-                }
-            }
-
-    }
-
+    //    Getting all Data from views and put them to User Object to upload
+    //    Redirected from Sign Up when allOkayForSignUp returns true
     private fun uploadDataForFirstTime(firebaseUser: FirebaseUser?) {
 
         val user = Users()
@@ -233,41 +367,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
-    }
 
 
+    //    Updates UI and redirects to MainActivity2
     private fun updateUI(firebaseUser: FirebaseUser?) {
         if (firebaseUser != null) {
             val userdao = Userdao()
             Log.e("firebase ID", " ID : ${firebaseUser.uid}")
-
-//
-//            var groupID: String = userdao.getUserGroupName(firebaseUser.uid)
-//            if (groupID.length < 5) {
-//                Log.e("Group ID", "Group ID fetched : $groupID")
-//                Toast.makeText(
-//                    this,
-//                    "An Internal Error Occurred please Login Again",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//                progressbar.visibility = View.GONE
-//                signUpxml.visibility = View.GONE
-//                signInxml.visibility = View.VISIBLE
-//                return
-//            } else {
             val mainActivity2Intent = Intent(this, MainActivity2::class.java)
             startActivity(mainActivity2Intent)
             finish()
-//            }
 
         } else {
             progressbar.visibility = View.GONE
@@ -279,125 +388,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initall() {
 
 
-        val sdf = SimpleDateFormat("yyyy")
-        val netDate = Date(System.currentTimeMillis())
-        val date = sdf.format(netDate)
-        Log.d("Date load", "Formatted Date : $date \ntimestami${System.currentTimeMillis()}")
-        val curruntYear = date.toInt()
-        val arrayOfYears = Array(5) {
-            yearAt(it, curruntYear)
-        }
-
-        val jsonArrayForInstituteNames: JSONArray = JSONObject(
-            getJsonDataFromAsset(
-                applicationContext,
-                "data.json"
-            )
-        ).getJSONArray("data")
-        val listOfInstituteNames = Array(jsonArrayForInstituteNames.length()) {
-            jsonArrayForInstituteNames.getString(it)
-        }
-        Log.d("Sucseecfully parse Inst", " List : ${listOfInstituteNames.toString()}")
-
-
-        val spinner1 = findViewById<Spinner>(R.id.spinner1)
-        val spinner2 = findViewById<Spinner>(R.id.spinner2)
-
-        textToJumpToSignIn.setOnClickListener {
-            signUpxml.visibility = View.GONE
-            signInxml.visibility = View.VISIBLE
-            crntStats = true
-        }
-        textToJumpToSignUp.setOnClickListener {
-            signInxml.visibility = View.GONE
-            signUpxml.visibility = View.VISIBLE
-            crntStats = false
-
-        }
-
-        signInBtn.setOnClickListener {
-            if (allOkayForSignIn()) {
-                signIn(emailEdittextForSignIn.text.toString(), passwordForSignIn.text.toString())
-            }
-        }
-
-        signupBtn.setOnClickListener {
-
-            if (allOkayForSignUp()) {
-                signUp(email_edittext.text.toString(), confirm_password_edittext.text.toString())
-            }
-
-        }
-        if (spinner1 != null) {
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_dropdown_item,
-                listOfInstituteNames
-            )
-            spinner1.adapter = adapter
-            spinner1.background.setColorFilter(
-                resources.getColor(R.color.whitemain),
-                PorterDuff.Mode.SRC_ATOP
-            )
-
-            spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    (parent.getChildAt(0) as TextView).textSize = 18f
-                    (parent.getChildAt(0) as TextView).setTextColor(resources.getColor(R.color.whitemain))
-                    val externalFont = Typeface.createFromAsset(assets, "productsanslight.ttf")
-                    (view as TextView).setTypeface(externalFont)
-
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
-                }
-            }
-        }
-        if (spinner2 != null) {
-            val adapter =
-                ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayOfYears)
-            spinner2.adapter = adapter
-            spinner2.background.setColorFilter(
-                resources.getColor(R.color.whitemain),
-                PorterDuff.Mode.SRC_ATOP
-            )
-
-            spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    (parent.getChildAt(0) as TextView).textSize = 18f
-                    (parent.getChildAt(0) as TextView).setTextColor(resources.getColor(R.color.whitemain))
-                    val externalFont = Typeface.createFromAsset(assets, "productsanslight.ttf")
-                    (view as TextView).setTypeface(externalFont)
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
-                }
-            }
-        }
+    // make toast when there is input error from User while entering data
+    // called from isOkayForSignUp() and isOkayForSIgnIn()
+    private fun doToastFor(str: String) {
+        Toast.makeText(this@MainActivity, "$str field cannot be empty", Toast.LENGTH_SHORT).show()
     }
 
-    private fun yearAt(it: Int, curruntYear: Int): Int {
-        return curruntYear + it - 4
 
-    }
 
 }
