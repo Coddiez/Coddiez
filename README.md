@@ -1,4 +1,4 @@
-link: https://drive.google.com/file/d/1fPVhwx_G0T8z96a-hVwSHXOLs-jeY5m8/view?usp=sharing
+
 
 # Inspiration
 * Almost all of us take part in coding contests that are organized by many different competitive programming websites. We take part in a competition, and that's it? Of course not. We have to keep track of our submissions, activities, ratings, ranking, and many more things. 
