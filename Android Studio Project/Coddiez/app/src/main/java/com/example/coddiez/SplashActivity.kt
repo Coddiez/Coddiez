@@ -6,14 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class SplashActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?){
-        setTheme(R.style.AppTheme);
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        startActivity(Intent(this, MainActivity::class.java))
-
-        // close splash activity
+        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         finish()
 
     }
