@@ -78,7 +78,7 @@ class MainActivity2 : AppCompatActivity() {
     private var currantLayoutIndex: Int = 0
     private val userDao = Userdao()
 
-    var chatDao = ChatDao()
+    private var chatDao = ChatDao()
 
     private val platformsList = ArrayList<platforms_list>()
     private val rankingDataList = ArrayList<rankData>()
