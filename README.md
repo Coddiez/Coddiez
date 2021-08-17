@@ -3,7 +3,7 @@
 # Inspiration
 * Almost all of us take part in coding contests that are organized by many different competitive programming websites. We take part in a competition, and that's it? Of course not. We have to keep track of our submissions, activities, ratings, ranking, and many more things. 
 
-* We can't add friends in some CP websites, so we have to remember their id's to compare with them. Like in CodeChef, there is no feature to add friends
+* We can't add friends in some Competitive Programming websites, so we have to remember their id's to compare with them. Like in CodeChef, there is no feature to add friends
 
 * More significant problem is that we all have accounts on more than one CP website, so it will never be an excellent option to switch between the tabs to see our profile on different websites.
 
