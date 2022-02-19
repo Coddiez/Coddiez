@@ -62,7 +62,7 @@ We have come across many new technologies in our way to make this project. A few
 ![](https://github.com/RajVarsani/Coddiez/blob/main/Extra%20Files/readme%20Images/HowItWorks.png)
 
 # Usage
-Install the .apk of Coddiez in your device and enough it’s enrich features.
+Install the .apk of Coddiez in your device and enjoy it’s enrich features.
 <br /><br />
 
 # Accomplishments that we're proud of
